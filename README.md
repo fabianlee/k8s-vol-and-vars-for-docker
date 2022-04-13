@@ -14,6 +14,8 @@ or set environment variables:
 
 But how do you emulate these when you are going through the software development lifecycle using a local Docker service?
 
+These volume and environmental values can also be set using a Docker swarm file, but that is not a focus of this example.
+
 ## Docker file mounting using volume
 
 You can mount local files to a specific location using the ['-v' volume](https://docs.docker.com/storage/volumes/) flag.  For example:
@@ -44,7 +46,21 @@ docker ... --env key=value
 docker ... -env-file env.properties
 ```
 
-## Docker swarm
 
-These volume and environmental values can also be set using a Docker swarm file, but that is not a focus of this example.
+## Test Kubernetes volume mounts and env vars
+
+```
+sudo apt install git curl make -y
+make k8s-apply
+make k8s-test
+```
+
+## Test equivalent Docker volume mounts and env vars
+
+```
+sudo apt install git curl make -y
+make
+make docker-run-bg
+make test
+```
 
