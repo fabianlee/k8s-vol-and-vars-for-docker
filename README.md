@@ -1,14 +1,14 @@
-# Emulating Kubernetes volumeMount, emptyDir, and envFrom during local Docker dev lifecycle
+# Emulating Kubernetes volumeMount, emptyDir, env and envFrom during local Docker dev lifecycle
 
-When deploying a container to Kubernetes, you can mount files and secrets to specific locations in the filesystem, as well as populate environment variables from a file or key. For example, with NGINX container you can mount:
+When deploying a container to Kubernetes, you can mount files and secrets to specific locations in the filesystem, as well as populate environment variables from a file or key. 
 
+For example, with an NGINX container you can mount:
 * /etc/nginx/nginx.conf - control the NGINX configuration
 * /usr/share/nginx/html/index.html - the default content delivered
 * /var/log/nginx - as an ephemeral directory for logs
 
 or set environment variables:
-
-* env.properties - use a file to set an entire list of key/value environment variables
+* env.properties - use a file to set an entire list of key/value pairs
 * set a single key/value
 
 
@@ -24,7 +24,7 @@ docker ... -v /my/local/path/nginx.conf:/etc/nginx/nginx.conf:ro
 
 ## Docker ephemeral directories using tempfs
 
-You can create ephemeral directories using the [tmpfs mount](https://docs.docker.com/storage/tmpfs/). For example:
+You can create ephemeral directories using a [tmpfs mount](https://docs.docker.com/storage/tmpfs/). For example:
 
 ```
 docker ... --mount type=tmpfs,destination=/var/log/nginx
@@ -43,4 +43,8 @@ docker ... --env key=value
 ```
 docker ... -env-file env.properties
 ```
+
+## Docker swarm
+
+These volume and environmental values can also be set using a Docker swarm file, but that is not a focus of this example.
 
