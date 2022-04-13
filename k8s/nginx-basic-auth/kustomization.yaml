@@ -1,0 +1,34 @@
+---
+
+namespace: nginx-auth-k8s
+
+resources:
+- namespace.yaml
+- deployment.yaml
+- service.yaml
+
+configMapGenerator:
+# for index.html
+- name: nginx-cm
+  namespace: default
+  files:
+  - cm-index.html
+# for nginx.conf
+- name: nginx-conf-configmap
+  namespace: default
+  files:
+  - nginx.conf
+# for environment variables
+- name: env-cm
+  envs:
+  - env.properties
+
+# for .htpasswd basic auth
+secretGenerator:
+- name: htpasswd-secret
+  files:
+  - htpasswd
+
+generatorOptions:
+  disableNameSuffixHash: true
+
