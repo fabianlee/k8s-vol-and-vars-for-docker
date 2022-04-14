@@ -43,7 +43,7 @@ docker ... --env key=value
 ## Docker set environment variables from file
 
 ```
-docker ... -env-file env.properties
+docker ... --env-file env.properties
 ```
 
 
